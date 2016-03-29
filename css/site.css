@@ -1,0 +1,172 @@
+@font-face{
+    font-family:Questa;
+    src:url(../fonts/2-questa_grande_regular_31-webfont.ttf) format('truetype'), url(../fonts/2-questa_grande_regular_31-webfont.woff) format('woff');
+}
+@font-face{
+    font-family:Cormorant-Bold;
+    src:url(../fonts/Cormorant-Bold.ttf) format('truetype'), url(../fonts/Cormorant-Bold.woff) format('woff');
+}
+@font-face{
+    font-family:Cormorant-BoldItalic;
+    src:url(../fonts/Cormorant-BoldItalic.ttf) format('truetype'), url(../fonts/Cormorant-BoldItalic.woff) format('woff');
+}
+@font-face{
+    font-family:SofiaProLight;
+    src:url(../fonts/SofiaProLight-webfont.ttf) format('truetype'), url(../fonts/SofiaProLight-webfont.woff) format('woff');
+}
+
+*{
+    padding:0;
+    margin:0;
+}
+#wrapper{
+    width:609px;
+    padding:0 0 0 17.05622236260265%;
+}
+body{
+    font-size:11px;
+    font-family:SofiaProLight;
+    background-image:url(../img/bg.png);
+    background-repeat:repeat-x;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight:normal;
+}
+a{
+    color:#5b45cc;
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
+}
+ul{
+    list-style:none;
+}
+tr{
+    height:28px;
+}
+tr:nth-child(even){
+    background:#f7f7f7;
+}
+th{
+    font-weight:normal;
+    text-align:left;
+}
+#theader{
+    line-height:45px;
+    text-align:right;
+    background:#362399;
+}
+#theader>a{
+    color:#FFF;
+}
+#logo{
+    display:block;
+}
+main{
+    display:block;
+    padding:65px 0 0 9px;
+}
+#tmain{
+    line-height:42px;
+    border-bottom:1px solid #cc7f45;
+}
+#tlmain{
+    font-size:14px;
+    font-family:Cormorant-BoldItalic;
+}
+#trmain{
+    float:right;
+}
+#flag{
+    margin:0 -1px 0 0;
+}
+#cont{
+    padding:0 0 68px 0;
+    border-bottom:3px solid #362399;
+}
+#lcont{
+    width:112px;
+    float:left;
+    padding:68px 0 0 0;
+    line-height:18px;
+}
+#mcont{
+    float:left;
+}
+#ltcont{
+    font-size:14px;
+    font-family:Cormorant-Bold;
+    color:#5b45cc;
+}
+.dname{
+    font-family:Cormorant-BoldItalic;
+}
+.btab{
+    float:left;
+    padding:16px 0 0 0;
+    font-size:18px;
+    line-height:26px;
+    border-bottom:3px solid #d1d1d1;
+}
+.btab:first-child{
+    width:165px;
+    border-color:#6752d0;
+}
+.btab:nth-child(2){
+    width:162px;
+}
+.btab:nth-child(2)>img{
+    opacity:.18;
+}
+.btab:last-child{
+    width:161px;
+}
+.btab:last-child>img{
+    opacity:.18;
+}
+.btab>img{
+    margin:0 3px 0 0;
+}
+#mtlcont{
+    float:left;
+    padding:24px 0 0 32px;
+    line-height:18px;
+}
+#mtrcont{
+    float:right;
+    padding:24px 82px 0 0;
+    line-height:18px;
+}
+#saldo{
+    font-size:24px;
+    line-height:24px;
+}
+.mtable{
+    margin:10px 0 0 0;
+}
+.lth{
+    width:144px;
+    padding:0 0 0 32px;
+}
+.ltd{
+    width:144px;
+    padding:0 0 0 32px;
+    font-weight:700;
+}
+.mtd{
+    width:140px;
+}
+.rtd{
+    width:172px;
+}
+#cnote{
+    font-size:9px;
+    text-align:right;
+    line-height:47px;
+}
+.fix{
+    clear:both;
+    width:0;
+    height:0;
+}
