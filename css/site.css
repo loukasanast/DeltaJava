@@ -108,25 +108,26 @@ main{
     font-size:18px;
     line-height:26px;
     border-bottom:3px solid #d1d1d1;
+    cursor:pointer;
 }
 .btab:first-child{
     width:165px;
-    border-color:#6752d0;
 }
 .btab:nth-child(2){
     width:162px;
 }
-.btab:nth-child(2)>img{
-    opacity:.18;
-}
 .btab:last-child{
     width:161px;
 }
-.btab:last-child>img{
-    opacity:.18;
-}
 .btab>img{
     margin:0 3px 0 0;
+    opacity:.18;
+}
+.btabact{
+    border-color:#6752d0!important;
+}
+.btabact>img{
+    opacity:1!important;
 }
 #mtlcont{
     float:left;
@@ -159,6 +160,62 @@ main{
 }
 .rtd{
     width:172px;
+}
+#tuber{
+    display:none;
+}
+.intd{
+    width:312px;
+}
+.inuber{
+    display:block;
+    width:223px;
+    margin:0 1px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom:1px solid #000;
+    background:transparent;
+    outline:none;
+}
+#tuber tr:nth-child(even){
+    background-color:transparent!important;
+}
+#btnsenden{
+    display:block;
+    width:43px;
+    float:right;
+    margin:7px 88px 0 0;
+    line-height:16px;
+    font-size:10px;
+    font-family:Cormorant-Bold;
+    color:#FFF;
+    border:1px solid #FFF;
+    background:#70a5ff;
+}
+#teig{
+    display:none;
+}
+.einsel{
+    width:117px;
+}
+#teig tr:nth-child(even){
+    background-color:transparent!important;
+}
+#teig tr:nth-child(odd){
+    background-color:#f7f7f7!important;
+}
+#btnspeichern{
+    display:block;
+    width:54px;
+    float:right;
+    margin:7px 55px 0 0;
+    line-height:16px;
+    font-size:10px;
+    font-family:Cormorant-Bold;
+    color:#FFF;
+    border:1px solid #FFF;
+    background:#70a5ff;
 }
 #cnote{
     font-size:9px;

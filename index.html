@@ -9,7 +9,7 @@
             <section id="wrapper">
                 <header>
                     <div id="theader">
-                        <img src="img/lock.png" alt="" style="margin:0 2px;vertical-align:-1px;" />
+                        <img src="img/lock.png" alt="" style="margin:0 2px;vertical-align:-1px;opacity:.18;" />
                         <a href="#">Abmelden</a>
                     </div>
                     <div id="mheader">
@@ -38,15 +38,15 @@
                         <section id="mcont">
                             <nav id="mnav">
                                 <ul>
-                                    <li class="btab">
+                                    <li id="umslink" class="btab btabact">
                                         <img src="img/graph.png" alt="" />
                                         Umsätze
                                     </li>
-                                    <li class="btab">
+                                    <li id="uberlink" class="btab">
                                         <img src="img/hand.png" alt="" />
                                         Überweisung
                                     </li>
-                                    <li class="btab">
+                                    <li id="eiglink" class="btab">
                                         <img src="img/tool.png" alt="" />
                                         Eigenschaften
                                     </li>
@@ -63,11 +63,11 @@
                                     <span id="saldo">5.314,05</span>
                                 </div>
                                 <div class="fix"></div>
-                                <table class="mtable" cellspacing="0">
+                                <table id="tums" class="mtable" cellspacing="0">
                                     <tr>
-                                        <th class="lth">Umsätze &euro;</td>
-                                        <th class="mth">Datum</td>
-                                        <th class="rth"></td>
+                                        <th class="lth">Umsätze &euro;</th>
+                                        <th class="mth">Datum</th>
+                                        <th class="rth"></th>
                                     </tr>
                                     <tr>
                                         <td class="ltd">Überweisung</td>
@@ -85,6 +85,76 @@
                                         <td class="rtd">-260.99</td>
                                     </tr>
                                 </table>
+                                <table id="tuber" class="mtable" cellspacing="0">
+                                    <tr>
+                                        <td class="lth" style="font-weight:700;">Betrag</td>
+                                        <td class="intd">
+                                            <input type="text" class="inuber" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ltd">IBAN</td>
+                                        <td class="intd">
+                                            <input type="text" class="inuber" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ltd">BIC</td>
+                                        <td class="intd">
+                                            <input type="text" class="inuber" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ltd">Verwendungszweck</td>
+                                        <td class="intd">
+                                            <input type="text" class="inuber" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input id="btnsenden" type="submit" value="Senden" />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="teig" class="mtable" cellspacing="0">
+                                    <tr>
+                                        <td class="ltd" style="font-weight:700;">Anzeige der</td>
+                                        <td class="mtd"></td>
+                                        <td class="rtd">
+                                            <select class="einsel">
+                                                <option>letzten 2 Jahre</option>
+                                                <option>letzten 3 Monate</option>
+                                                <option>letzten Woche</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ltd" style="font-weight:700;">Überweisungslimit</td>
+                                        <td class="mtd"></td>
+                                        <td class="rtd">
+                                            <select class="einsel">
+                                                <option>&euro; 500</option>
+                                                <option>&euro; 5000</option>
+                                                <option>&euro; 20.000</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="ltd" style="font-weight:700;">Auslandsüberweisungen</td>
+                                        <td class="mtd"></td>
+                                        <td class="rtd">
+                                            <select class="einsel">
+                                                <option>Ein</option>
+                                                <option>Aus</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <input id="btnspeichern" type="submit" value="Speichern" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </section>
                         <div class="fix"></div>
@@ -94,7 +164,25 @@
             </section>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
             <script>
-                
+                (function(){
+                    'use strict';
+                    $('.btab').click(function(){
+                        $('.btab').removeClass('btabact');
+                        $(this).addClass('btabact');
+                        $('.mtable').css('display', 'none');
+                        switch($(this).attr('id')){
+                            case 'umslink':
+                                $('#tums').css('display', 'table');
+                                break;
+                            case 'uberlink':
+                                $('#tuber').css('display', 'table');
+                                break;
+                            case 'eiglink':
+                                $('#teig').css('display', 'table');
+                                break;
+                        }
+                    });
+                }());
             </script>
         </body>
     </html>

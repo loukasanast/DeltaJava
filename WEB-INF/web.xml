@@ -8,4 +8,12 @@
 <servlet-name>HelloWorld</servlet-name>
 <url-pattern>/Hello</url-pattern>
 </servlet-mapping>
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>engineer.anastasiou.delta.Index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/ebanking.do</url-pattern>
+    </servlet-mapping>
 </web-app>
