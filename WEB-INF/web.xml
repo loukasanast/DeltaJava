@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app>
-<servlet>
-<servlet-name>HelloWorld</servlet-name>
-<servlet-class>HelloWorld</servlet-class>
-</servlet>
-<servlet-mapping>
-<servlet-name>HelloWorld</servlet-name>
-<url-pattern>/Hello</url-pattern>
-</servlet-mapping>
     <servlet>
         <servlet-name>Index</servlet-name>
         <servlet-class>engineer.anastasiou.delta.Index</servlet-class>

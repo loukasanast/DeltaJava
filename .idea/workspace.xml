@@ -2,11 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f720d888-045e-4cc0-9256-8ade258e6be6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WEB-INF/classes/engineer/anastasiou/delta/Index.class" afterPath="$PROJECT_DIR$/WEB-INF/classes/engineer/anastasiou/delta/Index.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/site.css" afterPath="$PROJECT_DIR$/css/site.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data.txt" afterPath="$PROJECT_DIR$/data.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eigenschaften.txt" afterPath="$PROJECT_DIR$/eigenschaften.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/engineer/anastasiou/delta/Index.java" afterPath="$PROJECT_DIR$/src/engineer/anastasiou/delta/Index.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/WEB-INF/classes/HelloWorld.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/WEB-INF/classes/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/WEB-INF/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/graph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/hand.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/img/images/tool.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/login.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/delta/HelloWorld.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/delta/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/delta/delta/Index.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/delta/delta/Konto.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/HelloWorld.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/delta/Index.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/delta/Konto.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/test.html" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/WEB-INF/web.xml" />
     </list>
     <ignored path="delta.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,10 +44,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Index.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Index.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/engineer/anastasiou/delta/Index.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="7.1363635">
+            <state vertical-scroll-proportion="0.0">
               <caret line="341" column="130" selection-start-line="341" selection-start-column="130" selection-end-line="341" selection-end-column="130" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -40,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.923077">
-              <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.023545707">
+              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -197,13 +213,13 @@
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Ueberweisung.java" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Umsaetze.java" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/EigSpeichern.java" />
-        <option value="$PROJECT_DIR$/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/eigenschaften.txt" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Eigenschaften.java" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Konto.java" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Ueberweiser.java" />
         <option value="$PROJECT_DIR$/src/engineer/anastasiou/delta/Index.java" />
         <option value="$PROJECT_DIR$/data.txt" />
+        <option value="$PROJECT_DIR$/WEB-INF/web.xml" />
       </list>
     </option>
   </component>
@@ -275,20 +291,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="delta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="delta" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -650,52 +652,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/delta/Konto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/delta/Index.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="30" selection-start-line="59" selection-start-column="30" selection-end-line="59" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HelloWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/engineer/anastasiou/delta/Geld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.045454547">
@@ -729,22 +685,6 @@
             <element signature="e#588#589#0" expanded="false" />
             <element signature="e#617#618#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WEB-INF/data.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.923077">
-          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -854,11 +794,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/engineer/anastasiou/delta/Index.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="7.1363635">
+        <state vertical-scroll-proportion="0.0">
           <caret line="341" column="130" selection-start-line="341" selection-start-column="130" selection-end-line="341" selection-end-column="130" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.023545707">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
