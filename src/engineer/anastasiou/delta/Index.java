@@ -14,6 +14,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class Index extends HttpServlet{
+    int anzeige = 712;
+    double limit = 500;
+    String ausland = "Ein";
 
     public void requestHandler(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -36,9 +39,6 @@ public class Index extends HttpServlet{
         boolean eingeloggt = false;
         Konto konto = new Konto();
 
-        int anzeige = 712;
-        double limit = 500;
-        String ausland = "Ein";
 
         if(req.getParameter("kontonummer") != null && req.getParameter("kontoidentifikation") != null){
             byte[] keyBytes = {1, 23, 54, 120, 44, 64, 0, 8};
@@ -66,29 +66,7 @@ public class Index extends HttpServlet{
                             }else if(k.split(";")[1].split(",")[i].equals(((Byte)encrypted[i]).toString())){
                                 eingeloggt = true;
 
-                                File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
-                                Eigenschaften eigenschaften = new Eigenschaften(req.getParameter("kontonummer"));
-
-                                anzeige = eigenschaften.getAnzeige();
-                                limit = eigenschaften.getLimit();
-                                ausland = eigenschaften.getAusland();
-
-                                for(String u : Files.readAllLines(dataFile.toPath())){
-                                    if(u.split(";")[0].equals(req.getParameter("kontonummer"))){
-                                        konto.getUmsaetze().add(u);
-                                    }
-                                }
-
-                                for(String u : konto.getUmsaetze()){
-                                    konto.getSaldo().setBetrag(konto.getSaldo().getBetrag() + Double.parseDouble(u.split(";")[3]));
-                                }
-
-                                konto.setKontonummer(k.split(";")[0]);
-                                konto.setPasswort(k.split(";")[1]);
-                                konto.setBlz(k.split(";")[2]);
-                                konto.setIban(k.split(";")[3]);
-                                konto.setBic(k.split(";")[4]);
-                                konto.setInhaber(k.split(";")[5]);
+                                initKonto(konto, req.getParameter("kontonummer"), k);
 
                                 if(req.getParameter("remember") != null){
                                     session.setAttribute("kontonummer", konto.getKontonummer());
@@ -116,29 +94,7 @@ public class Index extends HttpServlet{
                             }else if(k.split(";")[1].split(",")[i].equals(kontoidentifikation.split(",")[i])){
                                 eingeloggt = true;
 
-                                File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
-                                Eigenschaften eigenschaften = new Eigenschaften(kontonummer);
-
-                                anzeige = eigenschaften.getAnzeige();
-                                limit = eigenschaften.getLimit();
-                                ausland = eigenschaften.getAusland();
-
-                                for(String u : Files.readAllLines(dataFile.toPath())){
-                                    if(u.split(";")[0].equals(kontonummer)){
-                                        konto.getUmsaetze().add(u);
-                                    }
-                                }
-
-                                for(String u : konto.getUmsaetze()){
-                                    konto.getSaldo().setBetrag(konto.getSaldo().getBetrag() + Double.parseDouble(u.split(";")[3]));
-                                }
-
-                                konto.setKontonummer(k.split(";")[0]);
-                                konto.setPasswort(k.split(";")[1]);
-                                konto.setBlz(k.split(";")[2]);
-                                konto.setIban(k.split(";")[3]);
-                                konto.setBic(k.split(";")[4]);
-                                konto.setInhaber(k.split(";")[5]);
+                                initKonto(konto, kontonummer, k);
                             }else{
                                 break;
                             }
@@ -185,7 +141,7 @@ public class Index extends HttpServlet{
             out.println("<div id=\"lcont\">");
             out.println("</div>");
             out.println("<section id=\"mcont\">");
-            out.println("<form id=\"linform\" method=\"get\" action=\"\">");
+            out.println("<form id=\"linform\" method=\"post\" action=\"\">");
             out.println("<table style=\"margin-top:27px;\">");
             out.println("<tr>");
             out.println("<td>Konto-Nr.:</td>");
@@ -382,8 +338,8 @@ public class Index extends HttpServlet{
             out.println("</tr>");
             out.println("</table>");
             out.println("</form>");
-            out.println("<div id=\"eigerfolg\" style=\"display:none\">Ihre Änderungen wurden gespeichert</div>");
-            out.println("<div id=\"eigmisserfolg\" style=\"display:none;color:#FF0000;\">Ihre Änderungen wurden nicht gespeichert</div>");
+            out.println("<div id=\"eigerfolg\" style=\"display:none\">Ihre Änderungen wurden gespeichert.</div>");
+            out.println("<div id=\"eigmisserfolg\" style=\"display:none;color:#FF0000;\">Ihre Änderungen wurden nicht gespeichert.</div>");
             out.println("</div>");
         }
 
@@ -456,5 +412,32 @@ public class Index extends HttpServlet{
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException{
         requestHandler(req, res);
+    }
+
+    private void initKonto(Konto konto, String kontonummer, String k)
+            throws IOException{
+        File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
+        Eigenschaften eigenschaften = new Eigenschaften(kontonummer);
+
+        anzeige = eigenschaften.getAnzeige();
+        limit = eigenschaften.getLimit();
+        ausland = eigenschaften.getAusland();
+
+        for(String u : Files.readAllLines(dataFile.toPath())){
+            if(u.split(";")[0].equals(kontonummer)){
+                konto.getUmsaetze().add(u);
+            }
+        }
+
+        for(String u : konto.getUmsaetze()){
+            konto.getSaldo().setBetrag(konto.getSaldo().getBetrag() + Double.parseDouble(u.split(";")[3]));
+        }
+
+        konto.setKontonummer(k.split(";")[0]);
+        konto.setPasswort(k.split(";")[1]);
+        konto.setBlz(k.split(";")[2]);
+        konto.setIban(k.split(";")[3]);
+        konto.setBic(k.split(";")[4]);
+        konto.setInhaber(k.split(";")[5]);
     }
 }
