@@ -16,4 +16,20 @@
         <servlet-name>Index</servlet-name>
         <url-pattern>/ebanking.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Ueberweiser</servlet-name>
+        <servlet-class>engineer.anastasiou.delta.Ueberweiser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Ueberweiser</servlet-name>
+        <url-pattern>/ueberweiser.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>EigSpeichern</servlet-name>
+        <servlet-class>engineer.anastasiou.delta.EigSpeichern</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EigSpeichern</servlet-name>
+        <url-pattern>/eigspeichern.do</url-pattern>
+    </servlet-mapping>
 </web-app>

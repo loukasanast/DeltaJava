@@ -3,6 +3,8 @@ package engineer.anastasiou.delta;
 import java.io.*;
 import java.nio.file.Files;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.crypto.Cipher;
@@ -11,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class Index extends HttpServlet {
+public class Index extends HttpServlet{
 
     public void requestHandler(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -33,6 +35,10 @@ public class Index extends HttpServlet {
 
         boolean eingeloggt = false;
         Konto konto = new Konto();
+
+        int anzeige = 712;
+        double limit = 500;
+        String ausland = "Ein";
 
         if(req.getParameter("kontonummer") != null && req.getParameter("kontoidentifikation") != null){
             byte[] keyBytes = {1, 23, 54, 120, 44, 64, 0, 8};
@@ -60,6 +66,23 @@ public class Index extends HttpServlet {
                             }else if(k.split(";")[1].split(",")[i].equals(((Byte)encrypted[i]).toString())){
                                 eingeloggt = true;
 
+                                File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
+                                Eigenschaften eigenschaften = new Eigenschaften(req.getParameter("kontonummer"));
+
+                                anzeige = eigenschaften.getAnzeige();
+                                limit = eigenschaften.getLimit();
+                                ausland = eigenschaften.getAusland();
+
+                                for(String u : Files.readAllLines(dataFile.toPath())){
+                                    if(u.split(";")[0].equals(req.getParameter("kontonummer"))){
+                                        konto.getUmsaetze().add(u);
+                                    }
+                                }
+
+                                for(String u : konto.getUmsaetze()){
+                                    konto.getSaldo().setBetrag(konto.getSaldo().getBetrag() + Double.parseDouble(u.split(";")[3]));
+                                }
+
                                 konto.setKontonummer(k.split(";")[0]);
                                 konto.setPasswort(k.split(";")[1]);
                                 konto.setBlz(k.split(";")[2]);
@@ -77,38 +100,55 @@ public class Index extends HttpServlet {
                         }
                     }
                 }
-            }catch(Exception exc) {
+            }catch(Exception exc){
                 out.println(exc.getMessage());
             }
         }else if(kontonummer != null && kontoidentifikation != null){
             File kontenFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/konten.txt");
             List<String> konten = Files.readAllLines(kontenFile.toPath());
 
-            for(String k : konten){
-                if(k.split(";")[0].equals(kontonummer)) {
-                    for(int i = 0; i < k.split(";")[1].split(",").length; i++){
-                        if(k.split(";")[1].split(",")[i].equals(kontoidentifikation.split(",")[i]) && i != k.split(";")[1].split(",").length - 1){
-                            continue;
-                        }else if(k.split(";")[1].split(",")[i].equals(kontoidentifikation.split(",")[i])){
-                            eingeloggt = true;
+            try{
+                for(String k : konten){
+                    if(k.split(";")[0].equals(kontonummer)){
+                        for(int i = 0; i < k.split(";")[1].split(",").length; i++){
+                            if(k.split(";")[1].split(",")[i].equals(kontoidentifikation.split(",")[i]) && i != k.split(";")[1].split(",").length - 1){
+                                continue;
+                            }else if(k.split(";")[1].split(",")[i].equals(kontoidentifikation.split(",")[i])){
+                                eingeloggt = true;
 
-                            konto.setKontonummer(k.split(";")[0]);
-                            konto.setPasswort(k.split(";")[1]);
-                            konto.setBlz(k.split(";")[2]);
-                            konto.setIban(k.split(";")[3]);
-                            konto.setBic(k.split(";")[4]);
-                            konto.setInhaber(k.split(";")[5]);
-                        }else{
-                            break;
+                                File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
+                                Eigenschaften eigenschaften = new Eigenschaften(kontonummer);
+
+                                anzeige = eigenschaften.getAnzeige();
+                                limit = eigenschaften.getLimit();
+                                ausland = eigenschaften.getAusland();
+
+                                for(String u : Files.readAllLines(dataFile.toPath())){
+                                    if(u.split(";")[0].equals(kontonummer)){
+                                        konto.getUmsaetze().add(u);
+                                    }
+                                }
+
+                                for(String u : konto.getUmsaetze()){
+                                    konto.getSaldo().setBetrag(konto.getSaldo().getBetrag() + Double.parseDouble(u.split(";")[3]));
+                                }
+
+                                konto.setKontonummer(k.split(";")[0]);
+                                konto.setPasswort(k.split(";")[1]);
+                                konto.setBlz(k.split(";")[2]);
+                                konto.setIban(k.split(";")[3]);
+                                konto.setBic(k.split(";")[4]);
+                                konto.setInhaber(k.split(";")[5]);
+                            }else{
+                                break;
+                            }
                         }
                     }
                 }
+            }catch(Exception exc){
+                out.println(exc.getMessage());
             }
         }
-
-        File dataFile = new File("c:/Users/Lucas/Documents/Tomcat/webapps/delta/data.txt");
-        List<String> umsaetze = Files.readAllLines(dataFile.toPath());
-        double saldo = 0;
 
         Locale locale = new Locale("de", "DE");
         NumberFormat nf = NumberFormat.getInstance(locale);
@@ -232,11 +272,7 @@ public class Index extends HttpServlet {
             out.println("<div id=\"mtrcont\">");
             out.println("Saldo &euro;<br />");
 
-            for (String u : umsaetze) {
-                saldo += Double.parseDouble(u.split(";")[3]);
-            }
-
-            out.println("<span id=\"saldo\">" + nf.format(saldo) + "</span>");
+            out.println("<span id=\"saldo\">" + nf.format(konto.getSaldo().getBetrag()) + "</span>");
 
             out.println("</div>");
             out.println("<div class=\"fix\"></div>");
@@ -247,38 +283,52 @@ public class Index extends HttpServlet {
             out.println("<th class=\"rth\"></th>");
             out.println("</tr>");
 
-            for (String u : umsaetze) {
-                out.println("<tr>");
-                out.println("<td class=\"ltd\">" + u.split(";")[1] + "</td>");
-                out.println("<td class=\"mtd\">" + u.split(";")[2] + "</td>");
-                out.println("<td class=\"rtd\">" + u.split(";")[3].replace('.', ',') + "</td>");
-                out.println("</tr>");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            Date limitDate = new Date(new Date().getTime() - anzeige * 24 * 3600 * 1000L);
+
+            for(String u : konto.getUmsaetze()){
+                Date tempDate = new Date();
+
+                try{
+                    tempDate = sdf.parse(u.split(";")[2]);
+                }catch(Exception exc){
+                    out.println(exc.getMessage());
+                }
+
+                if(tempDate.after(limitDate)){
+                    out.println("<tr>");
+                    out.println("<td class=\"ltd\">" + u.split(";")[1] + "</td>");
+                    out.println("<td class=\"mtd\">" + u.split(";")[2] + "</td>");
+                    out.println("<td class=\"rtd\">" + String.format("%.2f%n", Double.parseDouble(u.split(";")[3])) + "</td>");
+                    out.println("</tr>");
+                }
             }
 
             out.println("</table>");
+            out.println("<form id=\"uberform\">");
             out.println("<table id=\"tuber\" class=\"mtable\" cellspacing=\"0\">");
             out.println("<tr>");
             out.println("<td class=\"ltd\" style=\"font-weight:700;\">Betrag</td>");
             out.println("<td class=\"intd\">");
-            out.println("<input type=\"text\" class=\"inuber\" />");
+            out.println("<input type=\"text\" id=\"uberbetrag\" class=\"inuber\" required />");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class=\"ltd\">IBAN</td>");
             out.println("<td class=\"intd\">");
-            out.println("<input type=\"text\" class=\"inuber\" />");
+            out.println("<input type=\"text\" id=\"uberiban\" class=\"inuber\" required />");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class=\"ltd\">BIC</td>");
             out.println("<td class=\"intd\">");
-            out.println("<input type=\"text\" class=\"inuber\" />");
+            out.println("<input type=\"text\" id=\"uberbic\" class=\"inuber\" required />");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
             out.println("<td class=\"ltd\">Verwendungszweck</td>");
             out.println("<td class=\"intd\">");
-            out.println("<input type=\"text\" class=\"inuber\" />");
+            out.println("<input type=\"text\"  id=\"uberverwendungszweck\" class=\"inuber\" required />");
             out.println("</td>");
             out.println("</tr>");
             out.println("<tr>");
@@ -287,15 +337,20 @@ public class Index extends HttpServlet {
             out.println("</td>");
             out.println("</tr>");
             out.println("</table>");
+            out.println("</form>");
+            out.println("<div id=\"ubererfolg\" style=\"display:none;\">Ihre Überweisung wurde angenommen.</div>");
+            out.println("<div id=\"ubermisserfolg\" style=\"display:none;color:#FF0000;\">Ihre Überweisung wurde nicht angenommen.</div>");
+            out.println("");
+            out.println("<form id=\"eigform\">");
             out.println("<table id=\"teig\" class=\"mtable\" cellspacing=\"0\">");
             out.println("<tr>");
             out.println("<td class=\"ltd\" style=\"font-weight:700;\">Anzeige der</td>");
             out.println("<td class=\"mtd\"></td>");
             out.println("<td class=\"rtd\">");
-            out.println("<select class=\"einsel\">");
-            out.println("<option>letzten 2 Jahre</option>");
-            out.println("<option>letzten 3 Monate</option>");
-            out.println("<option>letzten Woche</option>");
+            out.println("<select id=\"anzeige\" class=\"einsel\">");
+            out.println("<option value=\"712\" " + (anzeige == 712 ? "selected" : "") + ">letzten 2 Jahre</option>");
+            out.println("<option value=\"90\" " + (anzeige == 90 ? "selected" : "") + ">letzten 3 Monate</option>");
+            out.println("<option value=\"7\" " + (anzeige == 7 ? "selected" : "") + ">letzten Woche</option>");
             out.println("</select>");
             out.println("</td>");
             out.println("</tr>");
@@ -303,10 +358,10 @@ public class Index extends HttpServlet {
             out.println("<td class=\"ltd\" style=\"font-weight:700;\">Überweisungslimit</td>");
             out.println("<td class=\"mtd\"></td>");
             out.println("<td class=\"rtd\">");
-            out.println("<select class=\"einsel\">");
-            out.println("<option>&euro; 500</option>");
-            out.println("<option>&euro; 5.000</option>");
-            out.println("<option>&euro; 20.000</option>");
+            out.println("<select id=\"limit\" class=\"einsel\">");
+            out.println("<option value=\"500\" " + (limit == 500 ? "selected" : "") + ">&euro; 500</option>");
+            out.println("<option value=\"5000\" " + (limit == 5000 ? "selected" : "") + ">&euro; 5.000</option>");
+            out.println("<option value=\"20000\" " + (limit == 20000 ? "selected" : "") + ">&euro; 20.000</option>");
             out.println("</select>");
             out.println("</td>");
             out.println("</tr>");
@@ -314,9 +369,9 @@ public class Index extends HttpServlet {
             out.println("<td class=\"ltd\" style=\"font-weight:700;\">Auslandsüberweisungen</td>");
             out.println("<td class=\"mtd\"></td>");
             out.println("<td class=\"rtd\">");
-            out.println("<select class=\"einsel\">");
-            out.println("<option>Ein</option>");
-            out.println("<option>Aus</option>");
+            out.println("<select id=\"ausland\" class=\"einsel\">");
+            out.println("<option value=\"Ein\" " + (ausland.equals("Ein") ? "selected" : "") + ">Ein</option>");
+            out.println("<option value=\"Aus\" " + (ausland.equals("Aus") ? "selected" : "") + ">Aus</option>");
             out.println("</select>");
             out.println("</td>");
             out.println("</tr>");
@@ -326,6 +381,9 @@ public class Index extends HttpServlet {
             out.println("</td>");
             out.println("</tr>");
             out.println("</table>");
+            out.println("</form>");
+            out.println("<div id=\"eigerfolg\" style=\"display:none\">Ihre Änderungen wurden gespeichert</div>");
+            out.println("<div id=\"eigmisserfolg\" style=\"display:none;color:#FF0000;\">Ihre Änderungen wurden nicht gespeichert</div>");
             out.println("</div>");
         }
 
@@ -356,6 +414,34 @@ public class Index extends HttpServlet {
         out.println("}");
         out.println("});");
         out.println("$('#lanmelden').click(function(){ $('#linform').submit(); });");
+        out.println("$('#uberbetrag').blur(function(){");
+        out.println("if(parseInt($(this).val()) && $(this).val().replace('.', ',').indexOf(',') == -1){");
+        out.println("$(this).val($(this).val() + ',00')");
+        out.println("}");
+        out.println("});");
+        out.println("$('#uberform').submit(function(){");
+        out.println("$.post('ueberweiser.do', { kontonummer: " + konto.getKontonummer() + ", betrag: $('#uberbetrag').val(), saldo: " + konto.getSaldo().getBetrag() + " })");
+        out.println(".done(function(){");
+        out.println("$('#tums').append('<tr><td class=\"ltd\">Überweisung</td><td class=\"mtd\">' + (new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()) + '.' + (new Date().getMonth() < 9 ? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + '.' + new Date().getFullYear() + '</td><td class=\"rtd\">-' + $('#uberbetrag').val() + '</td></tr>');");
+        out.println("$('#uberbetrag').val('');");
+        out.println("$('#uberiban').val('');");
+        out.println("$('#uberbic').val('');");
+        out.println("$('#uberverwendungszweck').val('');");
+        out.println("$('#ubererfolg').fadeIn(0)");
+        out.println(".delay(3000).fadeOut('slow');");
+        out.println("})");
+        out.println(".fail(function(){");
+        out.println("$('#ubermisserfolg').fadeIn(0)");
+        out.println(".delay(3000).fadeOut('slow');");
+        out.println("});");
+        out.println("return false;");
+        out.println("});");
+        out.println("$('#eigform').submit(function(){");
+        out.println("$.post('eigspeichern.do', { kontonummer: " + konto.getKontonummer() + ", anzeige: $('#anzeige').val(), limit: $('#limit').val(), ausland: $('#ausland').val() })");
+        out.println(".done(function(){ $('#eigerfolg').fadeIn(0).delay(3000).fadeOut('slow', function(){ location.reload(); }); })");
+        out.println(".fail(function(){ $('#eigmisserfolg').fadeIn(0).delay(3000).fadeOut('slow'); });");
+        out.println("return false;");
+        out.println("});");
         out.println("}());");
         out.println("</script>");
         out.println("</body>");

@@ -1,13 +1,22 @@
 package engineer.anastasiou.delta;
 
-public class Konto {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Konto{
     private String inhaber;
     private String kontonummer;
     private String blz;
     private String iban;
     private String bic;
-    private double saldo;
+    private Geld saldo;
     private String passwort;
+    private List<String> umsaetze;
+
+    public Konto(){
+        saldo = new Geld(0);
+        umsaetze = new ArrayList<>();
+    }
 
     public String getInhaber() {
         return inhaber;
@@ -49,11 +58,11 @@ public class Konto {
         this.bic = bic;
     }
 
-    public double getSaldo() {
+    public Geld getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(Geld saldo) {
         this.saldo = saldo;
     }
 
@@ -63,5 +72,13 @@ public class Konto {
 
     public void setPasswort(String passwort) {
         this.passwort = passwort;
+    }
+
+    public List<String> getUmsaetze() {
+        return umsaetze;
+    }
+
+    public void setUmsaetze(List<String> umsaetze) {
+        this.umsaetze = umsaetze;
     }
 }
